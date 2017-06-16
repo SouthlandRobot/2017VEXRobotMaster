@@ -1,8 +1,8 @@
 ## Function view list
 
 #### MovementArray* createNewMovementArray(int length)
-- Discription:
-- Parameter:
+- Discription: create a array by given length
+- Parameter: lengths
 ***
 #### MovementArray* AddToMovementArray(MovementArray *oldArray,MovementUnit newUnit);
 - Discription:
@@ -84,9 +84,7 @@
 - Discription:
 - Parameter:
 ***
-'''
-aaaaaaa
-'''
+
 
 
 
