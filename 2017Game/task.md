@@ -6,4 +6,7 @@
 ## Task list
 1. read VEX API in <http://www.robotc.net/wikiarchive/VEX>.
 2. build a Recorder that can record user action when user control the robotc.
+```C
+Task userRecoder();
+```
 3. for each function, write a test function.
