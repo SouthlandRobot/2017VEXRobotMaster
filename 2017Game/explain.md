@@ -1,5 +1,21 @@
 ## Function view list
+* [MovementArray* createNewMovementArray(int length)](#createNewMovementArray)
+* [MovementArray* AddToMovementArray(MovementArray *oldArray,MovementUnit newUnit)](#AddToMovementArray)
+* [MovementUnit* removeFromMovementArray(MovementArray *oldArray,int place)](#removeFromMovementArray)
+* [void movement(int movement,int *array)](#movement)
+* [void resetmovement(int movement,int *array)](#resetmovement)
 
+* [void preSetFrontMove(int *array)](#preSetFrontMove)
+* [void preSetBackMove(int *array)](#preSetBackMove)
+* [void preSetLeftMove(int *array)](#preSetLeftMove)
+* [void preSetRightMove(int *array)](#preSetRightMove)
+* [void ArmMotorUpSet(int *array)](ArmMotorUpSet)
+* [void ArmMotorDownSet(int *array)](#ArmMotorDownSet)
+* [void HandMotorUpSet(int *array)](#HandMotorUpSet)
+* [void HandMotorDownSet(int *array)](#HandMotorDownSet)
+* [void specialSetMove(int *array)](#specialSetMove)
+* [int encoderCounter()](#encoderCounter)
+* [int timeCounter()](#timeCounter)
 #### MovementArray* createNewMovementArray(int length)
 - Discription: create a array by given length
 - Parameter: lengths
@@ -8,13 +24,16 @@
 - Discription:
 - Parameter:
 ***
-#### **MovementUnit* removeFromMovementArray(MovementArray *oldArray,int place)**
-- Discription:
-- Parameter:
+#### MovementUnit* removeFromMovementArray(MovementArray *oldArray,int place)
+- Discription:remove a unit form a movement array
+- Parameter: 
+	1. oldArray: the pointer of the array that need to remove unit
+	2. place: the position of the unit that will be remove 
 ***
 #### void movement(int movement,int *array);
-- Discription:
+- Discription: the function that use to start movement
 - Parameter:
+	1. movement:
 ***
 #### void resetmovement(int movement,int *array);
 - Discription:
