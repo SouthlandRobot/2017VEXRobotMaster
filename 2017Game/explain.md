@@ -20,47 +20,47 @@
 * [void stopMovement(MovementUnit unit)](#stopMovement)
 * [bool startMovement(MovementUnit unit)](#startMovement)
 ***
-#### MovementArray* createNewMovementArray(int length)
+#### <a name="createNewMovementArray"></a> MovementArray* createNewMovementArray(int length)
 - Discription: create a array by given length
 - Parameter: lengths
 ***
-#### MovementArray* AddToMovementArray(MovementArray *oldArray,MovementUnit newUnit);
+#### <a name="AddToMovementArray"></a> MovementArray* AddToMovementArray(MovementArray *oldArray,MovementUnit newUnit);
 - Discription:
 - Parameter:
 ***
-#### MovementUnit* removeFromMovementArray(MovementArray *oldArray,int place)
+#### <a name="AddToMovementArray"></a> MovementUnit* removeFromMovementArray(MovementArray *oldArray,int place)
 - Discription:remove a unit form a movement array
 - Parameter: 
 	1. oldArray: the pointer of the array that need to remove unit
 	2. place: the position of the unit that will be remove 
 ***
-#### void movement(int movement,int *array);
+#### <a name="AddToMovementArray"></a> void movement(int movement,int *array);
 - Discription: the function that use to start movement
 - Parameter:
 	1. movement: the movement code that build in
 	2. array: an array that cantain settings of each motor(length is four)
 ***
-#### void resetmovement(int movement,int *array);
+#### <a name="AddToMovementArray"></a> void resetmovement(int movement,int *array);
 - Discription: this function that will reset the motor to stop movement
 - Parameter:
 	1. movement: the movement code that build in
 	2. array: an array that cantain settings of each motor(length is four)
 ***
-#### bool checkmovement(int movement);
+#### <a name="AddToMovementArray"></a> bool checkmovement(int movement);
 - Discription: this function that use to check is any running movement that is running
 - Parameter: 
 	1. movement: the movement code that build in
 ***
-#### task movementOprator();
+#### <a name="AddToMovementArray"></a> task movementOprator();
 - Discription: the background thread that control all the movement in the robot
 - Parameter: N/A
 ***
-#### void preSetFrontMove(int *array);
+#### <a name="AddToMovementArray"></a> void preSetFrontMove(int *array);
 - Discription: this function is a preset movement that move robot forward
 - Parameter:
 	1. array: an array that cantain settings of each motor(length is four)
 ***
-#### void preSetBackMove(int *array);
+#### <a name="AddToMovementArray"></a> void preSetBackMove(int *array);
 - Discription: this function is a preset movement that move robot backward
 - Parameter:
 	1. array: an array that cantain settings of each motor(length is four)
