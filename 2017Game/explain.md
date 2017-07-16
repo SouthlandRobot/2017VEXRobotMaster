@@ -25,8 +25,10 @@
 - Parameter: lengths
 ***
 #### <a name="AddToMovementArray"></a> MovementArray* AddToMovementArray(MovementArray *oldArray,MovementUnit newUnit);
-- Discription:
-- Parameter:
+- Discription: add a movement unit to a array
+- Parameter: 
+	1. *oldArray the array that will put unit in
+	2. newUnit the unit that will put in to a array.
 ***
 #### <a name="removeFromMovementArray"></a> MovementUnit* removeFromMovementArray(MovementArray *oldArray,int place)
 - Discription:remove a unit form a movement array
