@@ -103,8 +103,8 @@ int angleCounter();
 /********************************************************/
 
 int encoderCounter(){
-	int disence=(EncoderBaseFL+EncoderBaseFR+EncoderBaseBL+EncoderBaseBR)/4;
-	return disence;
+	int distence=(EncoderBaseFL+EncoderBaseFR+EncoderBaseBL+EncoderBaseBR)/4;
+	return distence;
 }
 	int lastCallEncoderCounter;
 
@@ -445,16 +445,13 @@ task movementOprator(){
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+task userRecorder(){
+	MovementUnit;
+		if(runningActions.movement[i].movement>0){
+			unit=recordFromRemoteData(&runningActions,units);
+		if(runningActions.movement[i].movement<=0){
+			unit=recordFromRemoteData(&runningActions,units);
+			 stopRecorder(runningActions.movement[i]);
+		}
+		}
+}
