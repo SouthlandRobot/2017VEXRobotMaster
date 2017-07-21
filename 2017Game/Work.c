@@ -24,7 +24,7 @@
 #define LineTrackerNumber 6
 #define AngleMax 180
 #define AngleMin -180
-#define distenceMax 100000
+#define distanceMax 100000
 
 #define EncoderBaseFL getMotorEncoder(FL)
 #define EncoderBaseFR getMotorEncoder(FR)
@@ -51,7 +51,7 @@ enum MotorSetting{preSetFront=0,preSetBack=1,
 	ArmMotorSet=4,HandMotorSet=5,
 	specialSet=6};
 
-enum CountingSetting{distence=0,time=1,angle=2};
+enum CountingSetting{distance=0,time=1,angle=2};
 
 typedef struct {
 	bool motorChange;
@@ -59,6 +59,7 @@ typedef struct {
 	bool handChange;
 } RobotState;
 RobotState this;
+
 typedef struct{
 	MotorSetting motorNumber;
 	CountingSetting countingSetting;
@@ -103,8 +104,8 @@ int angleCounter();
 /********************************************************/
 
 int encoderCounter(){
-	int distence=(EncoderBaseFL+EncoderBaseFR+EncoderBaseBL+EncoderBaseBR)/4;
-	return distence;
+	int distance=(EncoderBaseFL+EncoderBaseFR+EncoderBaseBL+EncoderBaseBR)/4;
+	return distance;
 }
 	int lastCallEncoderCounter;
 
@@ -409,7 +410,7 @@ task movementOprator(){
 	MovementUnit unit;
 	isBusy=true;
 	if(waittingActions.length>0){
-		unit=*removeFromMovementArray(&waittingActions,0);
+		unit=*removeFromMovementArray(&waittingActions,0);//error
 		if(startMovement(unit)){
 			MovementArray newList;
 			newList=*AddToMovementArray(&runningActions,unit);
@@ -446,12 +447,12 @@ task movementOprator(){
 }
 
 task userRecorder(){
-	MovementUnit;
+	MovementUnit unit;
 		if(runningActions.movement[i].movement>0){
 			unit=recordFromRemoteData(&runningActions,units);
-		if(runningActions.movement[i].movement<=0){
-			unit=recordFromRemoteData(&runningActions,units);
-			 stopRecorder(runningActions.movement[i]);
-		}
+			if(runningActions.movement[i].movement<=0){
+				unit=recordFromRemoteData(&runningActions,units);
+				stopRecorder(runningActions.movement[i]);
+			}
 		}
 }
