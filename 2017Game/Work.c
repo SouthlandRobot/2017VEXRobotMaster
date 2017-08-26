@@ -407,41 +407,43 @@ void stopMovement(MovementUnit unit){
 }
 //not test yet
 task movementOprator(){
-	MovementUnit unit;
-	isBusy=true;
-	if(waittingActions.length>0){
-		unit=*removeFromMovementArray(&waittingActions,0);//error
-		if(startMovement(unit)){
-			MovementArray newList;
-			newList=*AddToMovementArray(&runningActions,unit);
-			runningActions=newList;
+	while(true){
+				MovementUnit unit;
+		isBusy=true;
+		if(waittingActions.length>0){
+			unit=*removeFromMovementArray(&waittingActions,0);//error
+			if(startMovement(unit)){
+				MovementArray newList;
+				newList=*AddToMovementArray(&runningActions,unit);
+				runningActions=newList;
+			}
+
 		}
+		isBusy=false;
 
-	}
-	isBusy=false;
+		int encodeCounterBuff=encoderCounter();
+		int encoderDiff=encodeCounterBuff-lastCallEncoderCounter;
+		lastCallEncoderCounter=encodeCounterBuff;
 
-	int encodeCounterBuff=encoderCounter();
-	int encoderDiff=encodeCounterBuff-lastCallEncoderCounter;
-	lastCallEncoderCounter=encodeCounterBuff;
+		int timeCounterBuff=timeCounter();
+		int timeCounterDiff=timeCounterBuff-lastCallTimeCounter;
+		lastCallTimeCounter=timeCounterBuff;
 
-	int timeCounterBuff=timeCounter();
-	int timeCounterDiff=timeCounterBuff-lastCallTimeCounter;
-	lastCallTimeCounter=timeCounterBuff;
+		int angleCounterBuff=angleCounter();
 
-	int angleCounterBuff=angleCounter();
+		int diffArray[3];
+		diffArray[0]=encoderDiff;
+		diffArray[1]=timeCounterDiff;
+		diffArray[2]=angleCounterBuff;
 
-	int diffArray[3];
-	diffArray[0]=encoderDiff;
-	diffArray[1]=timeCounterDiff;
-	diffArray[2]=angleCounterBuff;
-
-	for(int i=0;i<runningActions.length;i++){
-		runningActions.movement[i].difference=runningActions.movement[i].difference-
-												diffArray[runningActions.movement[i].countingSetting];
-		if(runningActions.movement[i].difference<=0){
-			if(!runningActions.movement[i].stayWhenFinish)
-				stopMovement(runningActions.movement[i]);
-			removeFromMovementArray(&runningActions,i);
+		for(int i=0;i<runningActions.length;i++){
+			runningActions.movement[i].difference=runningActions.movement[i].difference-
+													diffArray[runningActions.movement[i].countingSetting];
+			if(runningActions.movement[i].difference<=0){
+				if(!runningActions.movement[i].stayWhenFinish)
+					stopMovement(runningActions.movement[i]);
+				removeFromMovementArray(&runningActions,i);
+			}
 		}
 	}
 }
