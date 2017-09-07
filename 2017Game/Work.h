@@ -3,11 +3,6 @@
 #define AngleMin -180
 #define distanceMax 100000
 
-#define EncoderBaseFL getMotorEncoder(FL)
-#define EncoderBaseFR getMotorEncoder(FR)
-#define EncoderBaseBL getMotorEncoder(BL)
-#define EncoderBaseBR getMotorEncoder(BR)
-
 #define BaseFL motor[FL]
 #define BaseFR motor[FR]
 #define BaseBL motor[BL]
@@ -22,8 +17,7 @@
 #define HandMotorB motor[HL]
 #define HandMotorC motor[HR]
 #define HandMotorD motor[HR]
-#define MEMORY_SIZE 40960
-#define bool char
+#define MEMORY_SIZE 4096
 enum MotorSetting{preSetFront=0,preSetBack=1,
 	preSetLeft=2,preSetRight=3,
 	ArmMotorSet=4,HandMotorSet=5,
@@ -37,10 +31,9 @@ typedef struct {
 	bool handChange;
 } RobotState;
 RobotState this;
-
-typedef struct{
-	MotorSetting motorNumber;
-	CountingSetting countingSetting;
+typedef struct {
+	enum MotorSetting motorNumber;
+	enum CountingSetting countingSetting;
 	int difference;
 	bool stayWhenFinish;
 	//unit is times
@@ -48,7 +41,6 @@ typedef struct{
 	//unit is ms
 	int specialSet[4];
 } MovementUnit;
-
 typedef struct {
 	MovementUnit* movement;//May have error
 	int length;
@@ -79,34 +71,12 @@ int timeCounter();
 int angleCounter();
 /********************************************************/
 
-struct _CoreState {
-	int memorySize;
-	int state;//0 not ready, 1 ready to run, 2 stop by heap full
-	int freeMemoryCount;
-} coreState;
-enum MotorSetting {
-	preSetFront = 0, preSetBack = 1,
-	preSetLeft = 2, preSetRight = 3,
-	ArmMotorSet = 4, HandMotorSet = 5,
-	specialSet = 6
-};
 
-enum CountingSetting { distance = 0, time = 1, angle = 2 };
-typedef struct {
-	enum MotorSetting motorNumber;
-	enum CountingSetting countingSetting;
-	int difference;
-	bool stayWhenFinish;
-	//unit is times
-	//From -180 to 180 degree
-	//unit is ms
-	int specialSet[4];
-} MovementUnit;
 char heap[MEMORY_SIZE];
 char info[MEMORY_SIZE];
 int null = -1;
 int lastCallEncoderCounter;
 int lastCallTimeCounter;
-MovementArray waittingActions;
-MovementArray runningActions;
+MovementArray* waittingActions;
+MovementArray* runningActions;
 bool isBusy;
