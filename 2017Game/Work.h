@@ -61,8 +61,12 @@ void preSetLeftMove(int *array);
 void preSetRightMove(int *array);
 void ArmMotorUpSet(int *array);
 void ArmMotorDownSet(int *array);
-void HandMotorUpSet(int *array);
-void HandMotorDownSet(int *array);
+
+void WristOpenSet(int *array);
+void WristCloseSet(int *array);
+void HandOpenSet(int *array);
+void HandCloseSet(int *array);
+
 void specialSetMove(int *array);
 void preSetRightTrun(int *array);
 void preSetLeftTrun(int *array);
