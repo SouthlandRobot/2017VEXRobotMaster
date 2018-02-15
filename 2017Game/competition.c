@@ -71,6 +71,7 @@ typedef struct {
 	int rateSetting;
 } RobotState;
 RobotState this;
+
 void preSetFrontMove(int *array);
 void preSetBackMove(int *array);
 void preSetLeftMove(int *array);
@@ -96,6 +97,7 @@ int mode;
 task displayInfo();
 float rate;
 float rateSet[]={0.5,1,1.5,2};
+bool hwState;
 //0:auto|1:manu
 //0:Car mode|1:Coordinate mode
 //0:Speed control|1:Step mode
@@ -383,7 +385,7 @@ void baseMove(){
 	while(mode==3){
 		if(vexRT[Btn5U]==1&&vexRT[Btn6U]==1){
 			mode=0;
-			SensorValue[HW]=true
+			SensorValue[HW]=true;
 			break;
 		}
 		else if(vexRT[Btn8D]==1){
@@ -417,7 +419,7 @@ void baseMove(){
 	if(vexRT[Btn8L] == 1){
 		SensorValue[HW]=true;
 	}
-	if(vexRT[Btn8D] == 1){
+	else if(vexRT[Btn8D] == 1){
 		SensorValue[HW]=false;
 	}
 	if(0==0){
@@ -450,6 +452,7 @@ void baseMove(){
 	}
 	else
 		resetArmMotorSet(NULL);
+	hwState=SensorValue[HW];
 }
 void resetAll(){
 	resetArmMotorSet(NULL);

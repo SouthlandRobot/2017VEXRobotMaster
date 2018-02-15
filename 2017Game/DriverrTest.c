@@ -44,17 +44,23 @@ typedef struct {
 	bool motorChange;
 	bool armChange;
 	bool handChange;
+<<<<<<< HEAD
 	bool valueChange;
+=======
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 	int lYError;
 	int lXError;
 	int rYError;
 	int rXError;
+<<<<<<< HEAD
 	int armHoldA;
 	int armHoldB;
 	int armHoldC;
 	int armHoldD;
 	float baseRate;
 	int rateSetting;
+=======
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 } RobotState;
 RobotState this;
 void preSetFrontMove(int *array);
@@ -81,11 +87,15 @@ void resetAll();
 int mode;
 task displayInfo();
 float rate;
+<<<<<<< HEAD
 float rateSet[]={0.5,1,1.5,2};
+=======
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 //0:auto|1:manu
 //0:Car mode|1:Coordinate mode
 //0:Speed control|1:Step mode
 //0:low arm state|1:hold arm state|2:changing state
+<<<<<<< HEAD
 //?
 float bat1;
 float bat2;
@@ -93,24 +103,35 @@ float bat3;
 task main()
 {
 
+=======
+//
+task main()
+{
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 	rate=1;
 	this.lYError=vexRT[Ch3];
 	this.lXError=vexRT[Ch4];
 	this.rYError=vexRT[Ch2];
 	this.rXError=vexRT[Ch1];
+<<<<<<< HEAD
 	this.armHoldA=0;
 	this.armHoldB=0;
 	this.armHoldC=0;
 	this.armHoldD=0;
 	this.baseRate=1;
 	this.rateSetting=1;
+=======
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 	mode=3;
 	startTask(displayInfo);
 	while(true){
 		baseMove();
+<<<<<<< HEAD
 			bat1=BackupBatteryLevel;
 	bat2=nAvgBatteryLevel;
 	bat3=nImmediateBatteryLevel;
+=======
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 	}
 }
 
@@ -159,10 +180,17 @@ void preSetLeftTrun(int *array){
 	this.motorChange=true;
 }
 void specialSetMove(int* array){
+<<<<<<< HEAD
 	BaseFL=array[0]*this.baseRate;
 	BaseFR=array[1]*this.baseRate;
 	BaseBL=array[2]*this.baseRate;
 	BaseBR=array[3]*this.baseRate;
+=======
+	BaseFL=array[0];
+	BaseFR=array[1];
+	BaseBL=array[2];
+	BaseBR=array[3];
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 	//this.motorChange=true;
 }
 
@@ -244,7 +272,11 @@ string mainBattery, backupBattery;
 		 switch(count){
 		    case 0:
 		    {
+<<<<<<< HEAD
 			    if(lastMode!=mode||this.valueChange){
+=======
+			    if(lastMode!=mode||mode==4){
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 
 
 						if(mode==0){
@@ -265,6 +297,7 @@ string mainBattery, backupBattery;
 							displayLCDString(0, 0, "System Mode:");
 							displayLCDString(1, 0, "Locked");
 						}
+<<<<<<< HEAD
 						else if(mode ==4&&this.valueChange){
 							clearLCDLine(0);
 							clearLCDLine(1);
@@ -278,6 +311,17 @@ string mainBattery, backupBattery;
 							else if(this.rateSetting==3)
 								displayLCDString(1, 0, "Full");
 							this.valueChange=false;
+=======
+						else if(mode ==4||lastValue!=rate){
+							clearLCDLine(0);
+							clearLCDLine(1);
+							displayLCDString(0, 0, "Set value:");
+							displayLCDString(1, 0, "SpeedSet");
+							string rateS;
+							sprintf(rateS, "%5.4f", rate);
+							displayNextLCDString(rateS);
+							lastValue=rate;
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 						}
 						lastMode=mode;
 					}
@@ -289,10 +333,17 @@ string mainBattery, backupBattery;
 			    clearLCDLine(0);
 					clearLCDLine(1);
 					displayLCDString(0, 0, "Primary: ");
+<<<<<<< HEAD
 					sprintf(mainBattery, "%5.4f%c", nImmediateBatteryLevel/1000.0,'V');
 					displayNextLCDString(mainBattery);
 					displayLCDString(1, 0, "Backup: ");
 					sprintf(backupBattery, "%5.4f%c", BackupBatteryLevel/1000.0, 'V');
+=======
+					sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V');
+					displayNextLCDString(mainBattery);
+					displayLCDString(1, 0, "Backup: ");
+					sprintf(backupBattery, "%1.2f%c", BackupBatteryLevel/1000.0, 'V');
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 					displayNextLCDString(backupBattery);
 				}
 		    break;
@@ -326,6 +377,7 @@ void baseMove(){
 			}
 		}
 		while(mode==4){
+<<<<<<< HEAD
 		if(vexRT[Btn5D]==1&&vexRT[Btn6D]==1){
 			mode=3;
 			resetAll();
@@ -349,11 +401,29 @@ void baseMove(){
 	}
 
 	if(0==0){
+=======
+			if(vexRT[Btn5U]==1&&vexRT[Btn6U]==1){
+				mode=0;
+				break;
+			}
+			else if(vexRT[Btn5D]==1&&vexRT[Btn6D]==1){
+				mode=3;
+				resetAll();
+			}
+			else if(vexRT[Btn8L]==1)
+				rate=rate+0.000001;
+			else if(vexRT[Btn8R]==1)
+				rate=rate-0.000001;
+		}
+	}
+	if(mode==0){
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 		int values[4];
 		for(int i=0;i<4;i++){
 			values[i]=signs[i]*(lY)+lX;
 		}
 		specialSetMove(values);
+<<<<<<< HEAD
 	}
 
 	if(vexRT[Btn5U] == 1){
@@ -363,10 +433,64 @@ void baseMove(){
 	}
 
 	if(vexRT[Btn7D] == 1){
+=======
+
+		if(vexRT[Btn7U] == 1)
+			preSetFrontMove(NULL);
+		else if(vexRT[Btn7D] == 1)
+			preSetBackMove(NULL);
+		else if(vexRT[Btn7L] == 1)
+			preSetLeftMove(NULL);
+		else if(vexRT[Btn7R] == 1)
+			preSetRightMove(NULL);
+		else if(this.motorChange==true)
+			resetFront(NULL);
+	}
+	else if(mode==1){
+		if(lY>10)
+			preSetFrontMove(NULL);
+		else if(lY<-10)
+			preSetBackMove(NULL);
+		else if(lX>10)
+			preSetLeftMove(NULL);
+		else if(lX<-10)
+			preSetRightMove(NULL);
+		else
+			resetFront(NULL);
+
+		if(vexRT[Btn7U] == 1)
+			preSetFrontMove(NULL);
+		else if(vexRT[Btn7D] == 1)
+			preSetBackMove(NULL);
+		else if(vexRT[Btn7L] == 1)
+			preSetLeftTrun(NULL);
+		else if(vexRT[Btn7R] == 1)
+			preSetRightTrun(NULL);
+		else if(this.motorChange==true)
+			resetFront(NULL);
+	}
+
+	if(vexRT[Btn5U] == 1)
+		mode=0;
+	else if(vexRT[Btn5D] == 1)
+		mode=1;
+
+	if(vexRT[Btn6U] == 1){
+		SensorValue[H1]=true;
+		SensorValue[H2]=true;
+	}
+	else{
+		SensorValue[H1]=false;
+		SensorValue[H2]=false;
+	}
+
+	if(vexRT[Btn8D] == 1){
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 		this.lYError=vexRT[Ch3];
 		this.lXError=vexRT[Ch4];
 		this.rYError=vexRT[Ch2];
 		this.rXError=vexRT[Ch1];
+<<<<<<< HEAD
 		resetAll();
 	}
 
@@ -375,6 +499,15 @@ void baseMove(){
 		ArmMotorB=(-1*rY)*rate;
 		ArmMotorC=-1*(-1*rY)*rate;
 		ArmMotorD=(-1*rY)*rate;
+=======
+	}
+
+	if(vexRT[Btn6D] == 1){
+		ArmMotorA=-1*rY*rate;
+		ArmMotorB=rY*rate;
+		ArmMotorC=-1*rY*rate;
+		ArmMotorD=rY*rate;
+>>>>>>> 3eac4018736fe91ff1e39f9e7cf25910a4f73eef
 	}
 	else
 		resetArmMotorSet(NULL);
